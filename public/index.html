@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+<title>PwnThisPage</title>
+<style>
+  .odd {
+    background: #AAFFFF;
+    padding: 1em;
+  }
+  .even {
+    background: #AAFFAA;
+    padding: 1em;
+  }
+</style>
+</head>
+<body>
+<p>Here are some examples:</p>
+
+<div class="odd">
+  <h4>Example-01</h4>
+  <p>
+   Try entering something like <code>2+2</code> here.
+  </p>
+  <p>
+   Then try something more spicy: <code>(console.log("[WARN] Your server has been pwned"), secretFlag)</code>
+  <p>
+  <form action="/example-01" method="get">
+    <label for="input">Eval this and give answer:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+
+
+<div id="example-02" class="even">
+  <h4>Example-02</h4>
+  <p>
+  Test whether CodeQL implements an abstract semantics for the substring()
+  operation.
+  </p>
+  <p>
+  The data will be somewhat sanitized (more precisely, it will be transformed
+  to an empty string). So, it should be impossible to hack the server.
+  </p>
+  <p>
+  <form action="/example-02" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-02">
+
+
+<div id="example-03" class="odd">
+  <h4>Example-03</h4>
+  <p>
+  Test whether taint propagation through local <code>const</code>s works as
+  expected.
+  </p>
+  <p>
+  Try input <code>(console.log("PWNED"), secretFlag)</code> to trigger
+  CODE_EXEC vulnerability on the server (should respond with the quote about
+  borders etc.)
+  </p>
+  <p>
+  <form action="/example-03" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-03">
+
+
+<!-- uncomment to activate example 04
+<div id="example-04" class="even">
+  <h4>Example-04</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-04" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-04">
+     uncomment to activate example 04 -->
+
+
+
+
+<!-- uncomment to activate example 05
+<div id="example-05" class="odd">
+  <h4>Example-05</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-05" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-05">
+     uncomment to activate example 05 -->
+
+
+
+
+<!-- uncomment to activate example 06
+<div id="example-06" class="even">
+  <h4>Example-06</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-06" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-06">
+     uncomment to activate example 06 -->
+
+
+
+
+<!-- uncomment to activate example 07
+<div id="example-07" class="odd">
+  <h4>Example-07</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-07" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-07">
+     uncomment to activate example 07 -->
+
+
+
+
+<!-- uncomment to activate example 08
+<div id="example-08" class="even">
+  <h4>Example-08</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-08" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-08">
+     uncomment to activate example 08 -->
+
+
+
+
+<!-- uncomment to activate example 09
+<div id="example-09" class="odd">
+  <h4>Example-09</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-09" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-09">
+     uncomment to activate example 09 -->
+
+
+
+
+<!-- uncomment to activate example 10
+<div id="example-10" class="even">
+  <h4>Example-10</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-10" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-10">
+     uncomment to activate example 10 -->
+
+
+
+
+<!-- uncomment to activate example 11
+<div id="example-11" class="odd">
+  <h4>Example-11</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-11" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-11">
+     uncomment to activate example 11 -->
+
+
+
+
+<!-- uncomment to activate example 12
+<div id="example-12" class="even">
+  <h4>Example-12</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-12" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-12">
+     uncomment to activate example 12 -->
+
+
+
+
+<!-- uncomment to activate example 13
+<div id="example-13" class="odd">
+  <h4>Example-13</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-13" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-13">
+     uncomment to activate example 13 -->
+
+
+
+
+<!-- uncomment to activate example 14
+<div id="example-14" class="even">
+  <h4>Example-14</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-14" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-14">
+     uncomment to activate example 14 -->
+
+
+
+
+<!-- uncomment to activate example 15
+<div id="example-15" class="odd">
+  <h4>Example-15</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-15" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-15">
+     uncomment to activate example 15 -->
+
+
+
+
+<!-- uncomment to activate example 16
+<div id="example-16" class="even">
+  <h4>Example-16</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-16" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-16">
+     uncomment to activate example 16 -->
+
+
+
+
+<!-- uncomment to activate example 17
+<div id="example-17" class="odd">
+  <h4>Example-17</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-17" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-17">
+     uncomment to activate example 17 -->
+
+
+
+
+<!-- uncomment to activate example 18
+<div id="example-18" class="even">
+  <h4>Example-18</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-18" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-18">
+     uncomment to activate example 18 -->
+
+
+
+
+<!-- uncomment to activate example 19
+<div id="example-19" class="odd">
+  <h4>Example-19</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-19" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-19">
+     uncomment to activate example 19 -->
+
+
+
+
+<!-- uncomment to activate example 20
+<div id="example-20" class="even">
+  <h4>Example-20</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-20" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-20">
+     uncomment to activate example 20 -->
+
+
+
+
+<!-- uncomment to activate example 21
+<div id="example-21" class="odd">
+  <h4>Example-21</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-21" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-21">
+     uncomment to activate example 21 -->
+
+
+
+
+<!-- uncomment to activate example 22
+<div id="example-22" class="even">
+  <h4>Example-22</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-22" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-22">
+     uncomment to activate example 22 -->
+
+
+
+
+<!-- uncomment to activate example 23
+<div id="example-23" class="odd">
+  <h4>Example-23</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-23" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-23">
+     uncomment to activate example 23 -->
+
+
+
+
+<!-- uncomment to activate example 24
+<div id="example-24" class="even">
+  <h4>Example-24</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-24" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-24">
+     uncomment to activate example 24 -->
+
+
+
+
+<!-- uncomment to activate example 25
+<div id="example-25" class="odd">
+  <h4>Example-25</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-25" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-25">
+     uncomment to activate example 25 -->
+
+
+
+
+<!-- uncomment to activate example 26
+<div id="example-26" class="even">
+  <h4>Example-26</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-26" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-26">
+     uncomment to activate example 26 -->
+
+
+
+
+<!-- uncomment to activate example 27
+<div id="example-27" class="odd">
+  <h4>Example-27</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-27" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-27">
+     uncomment to activate example 27 -->
+
+
+
+
+<!-- uncomment to activate example 28
+<div id="example-28" class="even">
+  <h4>Example-28</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-28" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-28">
+     uncomment to activate example 28 -->
+
+
+
+
+<!-- uncomment to activate example 29
+<div id="example-29" class="odd">
+  <h4>Example-29</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-29" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-29">
+     uncomment to activate example 29 -->
+
+
+
+
+<!-- uncomment to activate example 30
+<div id="example-30" class="even">
+  <h4>Example-30</h4>
+  <p>
+  TODO: add example description here
+  </p>
+  <p>
+  <form action="/example-30" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  </p>
+</div>
+<div id="end-of-example-30">
+     uncomment to activate example 30 -->
+
+
+
+
+</body>
+</html>
+
