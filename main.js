@@ -39,7 +39,7 @@ app.get('/example-02', (req, res) => {
   // This test is interesting to see
   //   - if they approximate integers
   //   - if they have encoded an abstract semantics for substring()
-  const untainted = "";
+  const untainted = tainted.substring(0, 0);
   
   // eval(untainted) should always be undefined  
   res.send('Answer: ' + eval(untainted))
