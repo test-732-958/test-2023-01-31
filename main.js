@@ -56,6 +56,17 @@ app.get('/example-03', (req, res) => {
 // Example-03 end
 
 // Example-04 start
+app.get('/example-04', (req, res) => {
+  let tainted = req.query.input;
+  
+  if (true) {
+    tainted = "";
+  }
+
+  // This will never do anything, `tainted` is always empty
+  res.send('Answer: ' + eval(tainted))
+})
+
 // Example-04 end
 
 // Example-05 start
