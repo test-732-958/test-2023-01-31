@@ -189,12 +189,32 @@ app.get('/example-16', (req, res) => {
 // Example-17 end
 
 // Example-18 start
+app.get('/example-18', (req, res) => {
+  const a = []
+  for (i = 0; i < 10; i++) {
+    a.push(i);
+  }
+
+  a[42] = req.query.input;
+
+  res.send('Answer: ' + eval(a[42]))
+})
 // Example-18 end
 
 // Example-19 start
 // Example-19 end
 
 // Example-20 start
+app.get('/example-20', (req, res) => {
+  const a = []
+  for (i = 0; i < 10; i++) {
+    a.push(i);
+  }
+
+  a[42] = req.query.input;
+
+  res.send('Answer: ' + eval(a[7]))
+})
 // Example-20 end
 
 // Example-21 start
