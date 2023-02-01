@@ -111,6 +111,19 @@ app.get('/example-08', (req, res) => {
 // Example-09 end
 
 // Example-10 start
+function conditionalPassthrough(b, x) {
+  if (b) {
+    return x;
+  }
+
+  return "";
+}
+
+app.get('/example-10', (req, res) => {
+  let tainted = req.query.input;
+  tainted = conditionalPassthrough(true, tainted);
+  res.send('Answer: ' + eval(tainted))
+})
 // Example-10 end
 
 // Example-11 start
