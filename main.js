@@ -141,12 +141,48 @@ app.get('/example-12', (req, res) => {
 // Example-13 end
 
 // Example-14 start
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+app.get('/example-14', (req, res) => {
+  const a = getRandomInt(10);
+  const b = getRandomInt(10);
+
+  var max = a;
+  if (max >= a) {
+    max = b;
+  }
+
+  var tainted = "";
+  if (max >= a) { // always true
+    tainted = req.query.input;
+  }
+
+  res.send('Answer: ' + eval(tainted))
+})
 // Example-14 end
 
 // Example-15 start
 // Example-15 end
 
 // Example-16 start
+app.get('/example-16', (req, res) => {
+  const a = getRandomInt(10);
+  const b = getRandomInt(10);
+
+  var max = a;
+  if (max >= a) {
+    max = b;
+  }
+
+  var untainted = "";
+  if (a > max) { // always false
+    untainted = req.query.input;
+  }
+
+  res.send('Answer: ' + eval(untainted))
+})
 // Example-16 end
 
 // Example-17 start
