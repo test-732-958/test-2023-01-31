@@ -92,6 +92,19 @@ app.get('/example-06', (req, res) => {
 // Example-07 end
 
 // Example-08 start
+function customIdentity(x) {
+  if (3 + 10 > 5) {
+    return x;
+  }
+
+  return "";
+}
+
+app.get('/example-08', (req, res) => {
+  let tainted = req.query.input;
+  tainted = customIdentity(tainted);
+  res.send('Answer: ' + eval(tainted))
+})
 // Example-08 end
 
 // Example-09 start
