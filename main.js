@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 // The current idea is to have one separate request handler for each example.
-// 
+//
 // All examples are surrounded by alignment-markers to simplify merging
 // (otherwise, all the closing parentheses will collide every time)
 
@@ -33,15 +33,15 @@ app.get('/example-01', (req, res) => {
 // Example-02 start
 app.get('/example-02', (req, res) => {
   const tainted = req.query.input;
-  
+
   // According to the JS semantics (lol), if indexStart == indexEnd, then substring() returns an empty string.
   // This means that, after the assignment, untainted is not tainted (no pun intended)
   // This test is interesting to see
   //   - if they approximate integers
   //   - if they have encoded an abstract semantics for substring()
   const untainted = tainted.substring(0, 0);
-  
-  // eval(untainted) should always be undefined  
+
+  // eval(untainted) should always be undefined
   res.send('Answer: ' + eval(untainted))
 })
 // Example-02 end
@@ -58,7 +58,7 @@ app.get('/example-03', (req, res) => {
 // Example-04 start
 app.get('/example-04', (req, res) => {
   let tainted = req.query.input;
-  
+
   if (true) {
     tainted = "";
   }
@@ -73,6 +73,19 @@ app.get('/example-04', (req, res) => {
 // Example-05 end
 
 // Example-06 start
+function suppress(x) {
+  if (false) {
+    return x;
+  }
+
+  return "";
+}
+
+app.get('/example-06', (req, res) => {
+  const tainted = req.query.input;
+  const untainted = suppress(tainted);
+  res.send('Answer: ' + eval(untainted))
+})
 // Example-06 end
 
 // Example-07 start
@@ -155,4 +168,3 @@ app.listen(port, () => {
   console.log('Go to `http://localhost:3000/`.')
   console.log('Press CTRL+C to stop the server (restart with `node main.js`)')
 })
-
