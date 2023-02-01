@@ -130,6 +130,11 @@ app.get('/example-10', (req, res) => {
 // Example-11 end
 
 // Example-12 start
+app.get('/example-12', (req, res) => {
+  let tainted = req.query.input;
+  tainted = conditionalPassthrough(false, tainted);
+  res.send('Answer: ' + eval(tainted))
+})
 // Example-12 end
 
 // Example-13 start
