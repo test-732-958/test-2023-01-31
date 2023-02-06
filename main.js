@@ -279,7 +279,28 @@ app.get('/example-28', (req, res) => {
 // Example-29 end
 
 // Example-30 start
+app.get('/example-30', (req, res) => {
+  let tainted = req.query.input;
+
+  {
+    let tainted = "";
+  }
+
+  res.send('Answer: ' + eval(tainted))
+})
 // Example-30 end
+
+// Example-32 start
+app.get('/example-32', (req, res) => {
+  let untainted = req.query.input;
+
+  {
+    untainted = "";
+  }
+
+  res.send('Answer: ' + eval(untainted))
+})
+// Example-32 end
 
 
 

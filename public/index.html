@@ -18,6 +18,9 @@
   .lambdas {
     background: #CFE2F3;
   }
+  .block {
+    background: #FFF2CC;
+  }
 </style>
 </head>
 <body>
@@ -577,13 +580,13 @@
      uncomment to activate example 29 -->
 
 
-
-
-<!-- uncomment to activate example 30
-<div id="example-30" class="even">
+<div id="example-30" class="even block">
   <h4>Example-30</h4>
   <p>
-  TODO: add example description here
+  Block scope support
+  </p>
+  <p>
+  Vulnerable: YES
   </p>
   <p>
   <form action="/example-30" method="get">
@@ -592,11 +595,26 @@
     <input type="submit" value="Submit">
   </form>
   </p>
-</div>
+  </div>
 <div id="end-of-example-30">
-     uncomment to activate example 30 -->
 
-
+<div id="example-32" class="even block">
+  <h4>Example-32</h4>
+  <p>
+  Block scope support
+  </p>
+  <p>
+  Vulnerable: NO
+  </p>
+  <p>
+  <form action="/example-32" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  </p>
+  </div>
+<div id="end-of-example-32">
 
 
 </body>
