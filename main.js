@@ -302,7 +302,46 @@ app.get('/example-32', (req, res) => {
 })
 // Example-32 end
 
+// Example-34 start
+class MaybeDangerous {
+  constructor(dangerous) {
+    this.dangerous = dangerous;
+  }
 
+  run(req, res) {
+    this.sink(res, this.passthrough(this.source(req)));
+  }
+
+  source(req) {
+    return req.query.input;
+  }
+
+  passthrough(s) {
+    if (this.dangerous) {
+      return s;
+    }
+    else {
+      return "";
+    }
+  }
+
+  sink(res, s) {
+    res.send('Answer: ' + eval(s))
+  }
+}
+
+app.get('/example-34', (req, res) => {
+  const reallyDangerous = new MaybeDangerous(true);
+  reallyDangerous.run(req, res);
+})
+// Example-34 end
+
+// Example-36 start
+app.get('/example-36', (req, res) => {
+  const notDangerous = new MaybeDangerous(false);
+  notDangerous.run(req, res);
+})
+// Example-36 end
 
 // This starts the server
 app.listen(port, () => {
