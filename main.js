@@ -221,24 +221,58 @@ app.get('/example-20', (req, res) => {
 // Example-21 end
 
 // Example-22 start
+app.get('/example-22', (req, res) => {
+  const a = []
+  for (i = 0; i < 10; i++) {
+    a.push(i);
+    if (i == 7) {
+      a[i] = req.query.input;
+    }
+  }
+
+  res.send('Answer: ' + eval(a[7]))
+})
 // Example-22 end
 
 // Example-23 start
 // Example-23 end
 
 // Example-24 start
+app.get('/example-24', (req, res) => {
+  const a = []
+  for (i = 0; i < 10; i++) {
+    a.push(i);
+    if (i == 7) {
+      a[i] = req.query.input;
+    }
+  }
+
+  res.send('Answer: ' + eval(a[8]))
+})
 // Example-24 end
 
 // Example-25 start
 // Example-25 end
 
 // Example-26 start
+app.get('/example-26', (req, res) => {
+  const f = x => x
+  const tainted = f(req.query.input);
+
+  res.send('Answer: ' + eval(tainted))
+})
 // Example-26 end
 
 // Example-27 start
 // Example-27 end
 
 // Example-28 start
+app.get('/example-28', (req, res) => {
+  const f = x => { const y = x; return 0; }
+  const untainted = f(req.query.input);
+
+  res.send('Answer: ' + eval(untainted))
+})
 // Example-28 end
 
 // Example-29 start

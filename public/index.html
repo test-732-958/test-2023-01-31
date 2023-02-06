@@ -12,6 +12,12 @@
     background: #AAFFAA;
     padding: 1em;
   }
+  .arrays {
+    background: #E6B8AF;
+  }
+  .lambdas {
+    background: #CFE2F3;
+  }
 </style>
 </head>
 <body>
@@ -343,13 +349,13 @@
      uncomment to activate example 17 -->
 
 
-<div id="example-18" class="even">
-  <h4>Example-18</h4>
+<div id="example-18" class="even arrays">
+  <h4>Example-18 [Arrays Constant]</h4>
   <p>
-  Test whether CodeQL supports array.
+  Arrays (constant & variable indices)
   </p>
   <p>
-  The tainted data will be propagated. So, it's possible to hack the server.
+  Vulnerable: YES
   </p>
   <p>
   <form action="/example-18" method="get">
@@ -380,13 +386,13 @@
      uncomment to activate example 19 -->
 
 
-<div id="example-20" class="even">
-  <h4>Example-20</h4>
+<div id="example-20" class="even arrays">
+  <h4>Example-20 [Arrays Constant]</h4>
   <p>
-  Test whether CodeQL supports array.
+  Arrays (constant & variable indices)
   </p>
   <p>
-  The tainted data won't be propagated. So, it's not possible to hack the server.
+  Vulnerable: NO
   </p>
   <p>
   <form action="/example-20" method="get">
@@ -416,14 +422,13 @@
 <div id="end-of-example-21">
      uncomment to activate example 21 -->
 
-
-
-
-<!-- uncomment to activate example 22
-<div id="example-22" class="even">
-  <h4>Example-22</h4>
+<div id="example-22" class="even arrays">
+  <h4>Example-22 [Arrays Variable Index]</h4>
   <p>
-  TODO: add example description here
+  Arrays (constant & variable indices)
+  </p>
+  <p>
+  Vulnerable: YES
   </p>
   <p>
   <form action="/example-22" method="get">
@@ -432,11 +437,8 @@
     <input type="submit" value="Submit">
   </form>
   </p>
-</div>
+  </div>
 <div id="end-of-example-22">
-     uncomment to activate example 22 -->
-
-
 
 
 <!-- uncomment to activate example 23
@@ -457,13 +459,13 @@
      uncomment to activate example 23 -->
 
 
-
-
-<!-- uncomment to activate example 24
-<div id="example-24" class="even">
-  <h4>Example-24</h4>
+<div id="example-24" class="even arrays">
+  <h4>Example-24 [Arrays Variable Index]</h4>
   <p>
-  TODO: add example description here
+  Arrays (constant & variable indices)
+  </p>
+  <p>
+  Vulnerable: NO
   </p>
   <p>
   <form action="/example-24" method="get">
@@ -472,11 +474,8 @@
     <input type="submit" value="Submit">
   </form>
   </p>
-</div>
+  </div>
 <div id="end-of-example-24">
-     uncomment to activate example 24 -->
-
-
 
 
 <!-- uncomment to activate example 25
@@ -497,13 +496,13 @@
      uncomment to activate example 25 -->
 
 
-
-
-<!-- uncomment to activate example 26
-<div id="example-26" class="even">
+<div id="example-26" class="even lambdas">
   <h4>Example-26</h4>
   <p>
-  TODO: add example description here
+  Lambdas / Arrows
+  </p>
+  <p>
+  Vulnerable: YES
   </p>
   <p>
   <form action="/example-26" method="get">
@@ -512,9 +511,8 @@
     <input type="submit" value="Submit">
   </form>
   </p>
-</div>
+  </div>
 <div id="end-of-example-26">
-     uncomment to activate example 26 -->
 
 
 
@@ -539,11 +537,13 @@
 
 
 
-<!-- uncomment to activate example 28
-<div id="example-28" class="even">
+<div id="example-28" class="even lambdas">
   <h4>Example-28</h4>
   <p>
-  TODO: add example description here
+  Lambdas / Arrows
+  </p>
+  <p>
+  Vulnerable: NO
   </p>
   <p>
   <form action="/example-28" method="get">
@@ -552,9 +552,9 @@
     <input type="submit" value="Submit">
   </form>
   </p>
-</div>
+  </div>
 <div id="end-of-example-28">
-     uncomment to activate example 28 -->
+
 
 
 
