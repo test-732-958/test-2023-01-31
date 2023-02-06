@@ -308,12 +308,8 @@ class MaybeDangerous {
     this.dangerous = dangerous;
   }
 
-  run(req, res) {
-    this.sink(res, this.passthrough(this.source(req)));
-  }
-
-  source(req) {
-    return req.query.input;
+  run(s, res) {
+    this.sink(res, this.passthrough(s));
   }
 
   passthrough(s) {
@@ -331,15 +327,17 @@ class MaybeDangerous {
 }
 
 app.get('/example-34', (req, res) => {
+  const s = req.query.input;
   const reallyDangerous = new MaybeDangerous(true);
-  reallyDangerous.run(req, res);
+  reallyDangerous.run(s, res);
 })
 // Example-34 end
 
 // Example-36 start
 app.get('/example-36', (req, res) => {
+  const s = req.query.input;
   const notDangerous = new MaybeDangerous(false);
-  notDangerous.run(req, res);
+  notDangerous.run(s, res);
 })
 // Example-36 end
 
