@@ -396,6 +396,33 @@ app.get('/example-44', (req, res) => {
 })
 // Example-44 end
 
+// Example-46 start
+const evalMe = s => {
+  let internal = s;
+  return {
+    get: () => internal,
+    set: s => internal = s
+  };
+}
+
+app.get('/example-46', (req, res) => {
+  const s = req.query.input;
+  const dangerous = evalMe(s);
+
+  res.send('Answer: ' + eval(dangerous.get()))
+})
+// Example-46 end
+
+// Example-48 start
+app.get('/example-48', (req, res) => {
+  const s = req.query.input;
+  const notDangerous = evalMe(s);
+  notDangerous.set(0);
+
+  res.send('Answer: ' + eval(notDangerous.get()))
+})
+// Example-48 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
