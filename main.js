@@ -564,6 +564,61 @@ app.get('/example-68', (req, res) => {
 })
 // Example-68 end
 
+// Example-70 start
+function CustomException(message) {
+  const error = new Error(message);
+  return error;
+}
+
+CustomException.prototype = Object.create(Error.prototype);
+
+app.get('/example-70', (req, res) => {
+  try {
+    throw new CustomException(req.query.input);
+  }
+  catch (e) {
+    res.send('Answer: ' + eval(e.message))
+  }
+})
+// Example-70 end
+
+// Example-72 start
+app.get('/example-72', (req, res) => {
+  try {
+    throw new CustomException(req.query.input);
+  }
+  catch (e) {
+    res.send('Answer: ' + eval(e.code))
+  }
+})
+// Example-72 end
+
+// Example-74 start
+function throwException(req) {
+  throw new Error(req.query.input);
+}
+
+app.get('/example-74', (req, res) => {
+  try {
+    throwException(req);
+  }
+  catch (e) {
+    res.send('Answer: ' + eval(e.message))
+  }
+})
+// Example-74 end
+
+// Example-76 start
+app.get('/example-76', (req, res) => {
+  try {
+    throwException(req);
+  }
+  catch (e) {
+    res.send('Answer: ' + eval(e.code))
+  }
+})
+// Example-76 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
