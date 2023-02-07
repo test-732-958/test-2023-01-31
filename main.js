@@ -275,6 +275,28 @@ app.get('/example-28', (req, res) => {
 })
 // Example-28 end
 
+// Example-38 start
+function lambdaSink(res, f, s) {
+  res.send('Answer: ' + eval(f(s)))
+}
+
+app.get('/example-38', (req, res) => {
+  const f = x => { const y = x; return 0; }
+  const s = req.query.input;
+
+  lambdaSink(res, f, s);
+})
+// Example-38 end
+
+// Example-40 start
+app.get('/example-40', (req, res) => {
+  const f = x => x;
+  const s = req.query.input;
+
+  lambdaSink(res, f, s);
+})
+// Example-40 end
+
 // Example-29 start
 // Example-29 end
 
