@@ -363,6 +363,39 @@ app.get('/example-36', (req, res) => {
 })
 // Example-36 end
 
+// Example-42 start
+class StaticMaybeDangerous {
+  static run(dangerous, s, res) {
+    StaticMaybeDangerous.sink(res, StaticMaybeDangerous.passthrough(dangerous, s));
+  }
+
+  static passthrough(dangerous, s) {
+    if (dangerous) {
+      return s;
+    }
+    else {
+      return "";
+    }
+  }
+
+  static sink(res, s) {
+    res.send('Answer: ' + eval(s))
+  }
+}
+
+app.get('/example-42', (req, res) => {
+  const s = req.query.input;
+  StaticMaybeDangerous.run(true, s, res);
+})
+// Example-42 end
+
+// Example-44 start
+app.get('/example-44', (req, res) => {
+  const s = req.query.input;
+  StaticMaybeDangerous.run(false, s, res);
+})
+// Example-44 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
