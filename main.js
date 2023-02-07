@@ -542,6 +542,17 @@ app.get('/example-64', (req, res) => {
 })
 // Example-64 end
 
+// Example-66 start
+app.get('/example-66', (req, res) => {
+  try {
+    throw new Error(req.query.input);
+  }
+  catch (e) {
+    res.send('Answer: ' + eval(e.message))
+  }
+})
+// Example-66 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
