@@ -33,6 +33,9 @@
   .dict-known {
     background: #93C47D;
   }
+  .hoisting {
+    background: #A64D79;
+  }
 </style>
 </head>
 <body>
@@ -807,6 +810,42 @@
   </p>
   </div>
 <div id="end-of-example-52">
+
+<div id="example-54" class="even hoisting">
+  <h4>Example-54</h4>
+  <p>
+  Hoisting
+  </p>
+  <p>
+  Vulnerable: YES
+  </p>
+  <p>
+  <form action="/example-54" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  </p>
+  </div>
+<div id="end-of-example-54">
+
+<div id="example-56" class="even hoisting">
+  <h4>Example-52</h4>
+  <p>
+  Hoisting
+  </p>
+  <p>
+  Vulnerable: NO
+  </p>
+  <p>
+  <form action="/example-56" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  </p>
+  </div>
+<div id="end-of-example-56">
 
 </body>
 </html>

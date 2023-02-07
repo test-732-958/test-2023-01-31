@@ -445,6 +445,35 @@ app.get('/example-52', (req, res) => {
 })
 // Example-52 end
 
+
+// Example-54 start
+app.get('/example-54', (req, res) => {
+  a = req.query.input;
+
+  function codeHoist() {
+      var a = 0;
+  }
+
+  codeHoist();
+
+  res.send('Answer: ' + eval(a))
+})
+// Example-54 end
+
+// Example-56 start
+app.get('/example-56', (req, res) => {
+  a = req.query.input;
+
+  function codeHoist() {
+      a = 0;
+  }
+
+  codeHoist();
+
+  res.send('Answer: ' + eval(a))
+})
+// Example-56 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
