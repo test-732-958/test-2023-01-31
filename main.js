@@ -510,6 +510,38 @@ app.get('/example-60', (req, res) => {
 })
 // Example-60 end
 
+// Example-62 start
+app.get('/example-62', (req, res) => {
+  let obj = {
+    dangerous: req.query.input,
+    notDangerous: 0,
+    get: function () {
+      return this.dangerous;
+    },
+  }
+
+  const dangerous = 0;
+
+  res.send('Answer: ' + eval(obj.get()))
+})
+// Example-62 end
+
+// Example-64 start
+app.get('/example-64', (req, res) => {
+  let obj = {
+    dangerous: req.query.input,
+    notDangerous: 0,
+    get: function () {
+      return this.notDangerous;
+    },
+  }
+
+  const dangerous = 0;
+
+  res.send('Answer: ' + eval(obj.get()))
+})
+// Example-64 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
