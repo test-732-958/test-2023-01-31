@@ -423,6 +423,28 @@ app.get('/example-48', (req, res) => {
 })
 // Example-48 end
 
+// Example-50 start
+app.get('/example-50', (req, res) => {
+  var dict = {
+    "dangerous": req.query.input,
+    "notDangerous": 0
+  }
+
+  res.send('Answer: ' + eval(dict["dangerous"]))
+})
+// Example-50 end
+
+// Example-52 start
+app.get('/example-52', (req, res) => {
+  var dict = {
+    "dangerous": req.query.input,
+    "notDangerous": 0
+  }
+
+  res.send('Answer: ' + eval(dict["notDangerous"]))
+})
+// Example-52 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
