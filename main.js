@@ -474,6 +474,42 @@ app.get('/example-56', (req, res) => {
 })
 // Example-56 end
 
+// Example-58 start
+app.get('/example-58', (req, res) => {
+  const dangerous = "dangerous";
+  const not = "not";
+  const field = "field";
+
+  const notDangerousField = not + dangerous + field;
+  const dangerousField = dangerous + field;
+
+  var dict = {
+    "dangerousfield": req.query.input,
+    "notdangerousfield": 0
+  }
+
+  res.send('Answer: ' + eval(dict[dangerousField]))
+})
+// Example-58 end
+
+// Example-60 start
+app.get('/example-60', (req, res) => {
+  const dangerous = "dangerous";
+  const not = "not";
+  const field = "field";
+
+  const notDangerousField = not + dangerous + field;
+  const dangerousField = dangerous + field;
+
+  var dict = {
+    "dangerousfield": req.query.input,
+    "notdangerousfield": 0
+  }
+
+  res.send('Answer: ' + eval(dict[notDangerousField]))
+})
+// Example-60 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
