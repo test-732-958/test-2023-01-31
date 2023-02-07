@@ -619,6 +619,46 @@ app.get('/example-76', (req, res) => {
 })
 // Example-76 end
 
+// Example-78 start
+const evalMeGet = s => {
+  let internal = s;
+  return {
+    get: () => internal["code"]
+  };
+}
+
+const evalMeSet = s => {
+  let internal = { "code": s };
+  return {
+    set: s => internal["code"] = s
+  };
+}
+
+app.get('/example-78', (req, res) => {
+  const s = { "code": req.query.input };
+
+  const a = evalMeGet(s);
+  const b = evalMeSet(s);
+
+  b.set(0);
+
+  res.send('Answer: ' + eval(a.get()))
+})
+// Example-78 end
+
+// Example-80 start
+app.get('/example-80', (req, res) => {
+  const s = { "code": 0 };
+
+  const a = evalMeGet(s);
+  const b = evalMeSet(s);
+
+  b.set(req.query.input);
+
+  res.send('Answer: ' + eval(a.get()))
+})
+// Example-80 end
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

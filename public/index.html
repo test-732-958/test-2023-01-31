@@ -48,6 +48,9 @@
   .inter-exception {
     background: #F1C232;
   }
+  .closure-mutable-shared {
+    background: #B6D7A8;
+  }
 </style>
 </head>
 <body>
@@ -1038,6 +1041,42 @@
   </p>
   </div>
 <div id="end-of-example-76">
+
+<div id="example-78" class="even closure-mutable-shared">
+  <h4>Example-78</h4>
+  <p>
+  Closures capturing shared mutable state
+  </p>
+  <p>
+  Vulnerable: YES
+  </p>
+  <p>
+  <form action="/example-78" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  </p>
+  </div>
+<div id="end-of-example-78">
+
+<div id="example-80" class="even closure-mutable-shared">
+  <h4>Example-80</h4>
+  <p>
+  Closures capturing shared mutable state
+  </p>
+  <p>
+  Vulnerable: NO
+  </p>
+  <p>
+  <form action="/example-80" method="get">
+    <label for="input">Input:</label>
+    <input type="text" id="input" name="input"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  </p>
+  </div>
+<div id="end-of-example-80">
 
 </body>
 </html>
