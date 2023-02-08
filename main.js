@@ -361,41 +361,38 @@ app.get('/example-36', (req, res) => {
   const s = req.query.input;
   const untainted = new MaybeTainted(false).run(s);
 
-  // Vulnerable
+  // Non-vulnerable
   res.send('Answer: ' + eval(untainted));
 })
 // Example-36 end
 
 // Example-42 start
-class StaticMaybeDangerous {
-  static run(dangerous, s, res) {
-    StaticMaybeDangerous.sink(res, StaticMaybeDangerous.passthrough(dangerous, s));
+class StaticMaybeTainted {
+  static run(taint, s) {
+    return this.passthrough(taint, s);
   }
 
-  static passthrough(dangerous, s) {
-    if (dangerous) {
-      return s;
-    }
-    else {
-      return "";
-    }
-  }
-
-  static sink(res, s) {
-    res.send('Answer: ' + eval(s))
+  static passthrough(taint, s) {
+    return taint ? s : 0;
   }
 }
 
 app.get('/example-42', (req, res) => {
   const s = req.query.input;
-  StaticMaybeDangerous.run(true, s, res);
+  const tainted = StaticMaybeTainted.run(true, s);
+
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-42 end
 
 // Example-44 start
 app.get('/example-44', (req, res) => {
   const s = req.query.input;
-  StaticMaybeDangerous.run(false, s, res);
+  const untainted = StaticMaybeTainted.run(false, s);
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-44 end
 
