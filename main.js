@@ -311,10 +311,11 @@ app.get('/example-30', (req, res) => {
   let tainted = req.query.input;
 
   {
-    let tainted = "";
+    let tainted = 0;
   }
 
-  res.send('Answer: ' + eval(tainted))
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-30 end
 
@@ -323,10 +324,11 @@ app.get('/example-32', (req, res) => {
   let untainted = req.query.input;
 
   {
-    untainted = "";
+    untainted = 0;
   }
 
-  res.send('Answer: ' + eval(untainted))
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-32 end
 
