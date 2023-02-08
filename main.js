@@ -333,41 +333,36 @@ app.get('/example-32', (req, res) => {
 // Example-32 end
 
 // Example-34 start
-class MaybeDangerous {
-  constructor(dangerous) {
-    this.dangerous = dangerous;
+class MaybeTainted {
+  constructor(taint) {
+    this.taint = taint;
   }
 
-  run(s, res) {
-    this.sink(res, this.passthrough(s));
+  run(s) {
+    return this.passthrough(s);
   }
 
   passthrough(s) {
-    if (this.dangerous) {
-      return s;
-    }
-    else {
-      return "";
-    }
-  }
-
-  sink(res, s) {
-    res.send('Answer: ' + eval(s))
+    return this.taint ? s : 0;
   }
 }
 
 app.get('/example-34', (req, res) => {
   const s = req.query.input;
-  const reallyDangerous = new MaybeDangerous(true);
-  reallyDangerous.run(s, res);
+  const tainted = new MaybeTainted(true).run(s);
+
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-34 end
 
 // Example-36 start
 app.get('/example-36', (req, res) => {
   const s = req.query.input;
-  const notDangerous = new MaybeDangerous(false);
-  notDangerous.run(s, res);
+  const untainted = new MaybeTainted(false).run(s);
+
+  // Vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-36 end
 
