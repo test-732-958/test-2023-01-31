@@ -397,7 +397,7 @@ app.get('/example-44', (req, res) => {
 // Example-44 end
 
 // Example-46 start
-const evalMe = s => {
+const stateWrapper = s => {
   let internal = s;
   return {
     get: () => internal,
@@ -407,19 +407,25 @@ const evalMe = s => {
 
 app.get('/example-46', (req, res) => {
   const s = req.query.input;
-  const dangerous = evalMe(s);
+  const sWrapper = stateWrapper(s);
+  const tainted = sWrapper.get();
 
-  res.send('Answer: ' + eval(dangerous.get()))
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-46 end
 
 // Example-48 start
 app.get('/example-48', (req, res) => {
   const s = req.query.input;
-  const notDangerous = evalMe(s);
-  notDangerous.set(0);
+  const sWrapper = stateWrapper(s);
 
-  res.send('Answer: ' + eval(notDangerous.get()))
+  sWrapper.set(0);
+
+  const untainted = sWrapper.get();
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-48 end
 
