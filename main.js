@@ -191,12 +191,13 @@ app.get('/example-16', (req, res) => {
 // Example-18 start
 app.get('/example-18', (req, res) => {
   const a = []
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 100; i++) {
     a.push(i);
   }
 
   a[42] = req.query.input;
 
+  // Vulnerable
   res.send('Answer: ' + eval(a[42]))
 })
 // Example-18 end
@@ -207,13 +208,14 @@ app.get('/example-18', (req, res) => {
 // Example-20 start
 app.get('/example-20', (req, res) => {
   const a = []
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 100; i++) {
     a.push(i);
   }
 
   a[42] = req.query.input;
 
-  res.send('Answer: ' + eval(a[7]))
+  // Non-vulnerable
+  res.send('Answer: ' + eval(a[0]))
 })
 // Example-20 end
 
@@ -223,14 +225,15 @@ app.get('/example-20', (req, res) => {
 // Example-22 start
 app.get('/example-22', (req, res) => {
   const a = []
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 100; i++) {
     a.push(i);
-    if (i == 7) {
+    if (i == 42) {
       a[i] = req.query.input;
     }
   }
 
-  res.send('Answer: ' + eval(a[7]))
+  // Vulnerable
+  res.send('Answer: ' + eval(a[42]))
 })
 // Example-22 end
 
@@ -240,14 +243,15 @@ app.get('/example-22', (req, res) => {
 // Example-24 start
 app.get('/example-24', (req, res) => {
   const a = []
-  for (i = 0; i < 10; i++) {
+  for (i = 0; i < 100; i++) {
     a.push(i);
-    if (i == 7) {
+    if (i == 42) {
       a[i] = req.query.input;
     }
   }
 
-  res.send('Answer: ' + eval(a[8]))
+  // Non-vulnerable
+  res.send('Answer: ' + eval(a[0]))
 })
 // Example-24 end
 
