@@ -431,23 +431,29 @@ app.get('/example-48', (req, res) => {
 
 // Example-50 start
 app.get('/example-50', (req, res) => {
-  var dict = {
-    "dangerous": req.query.input,
-    "notDangerous": 0
+  const dict = {
+    "tainted": req.query.input,
+    "untainted": 0
   }
 
-  res.send('Answer: ' + eval(dict["dangerous"]))
+  const tainted = dict["tainted"];
+
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-50 end
 
 // Example-52 start
 app.get('/example-52', (req, res) => {
-  var dict = {
-    "dangerous": req.query.input,
-    "notDangerous": 0
+  const dict = {
+    "tainted": req.query.input,
+    "untainted": 0
   }
 
-  res.send('Answer: ' + eval(dict["notDangerous"]))
+  const untainted = dict["untainted"];
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-52 end
 
