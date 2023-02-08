@@ -190,15 +190,15 @@ app.get('/example-16', (req, res) => {
 
 // Example-18 start
 app.get('/example-18', (req, res) => {
-  const a = []
-  for (i = 0; i < 100; i++) {
+  const a = [];
+  for (let i = 0; i < 100; i++) {
     a.push(i);
   }
 
   a[42] = req.query.input;
 
   // Vulnerable
-  res.send('Answer: ' + eval(a[42]))
+  res.send('Answer: ' + eval(a[42]));
 })
 // Example-18 end
 
@@ -207,15 +207,15 @@ app.get('/example-18', (req, res) => {
 
 // Example-20 start
 app.get('/example-20', (req, res) => {
-  const a = []
-  for (i = 0; i < 100; i++) {
+  const a = [];
+  for (let i = 0; i < 100; i++) {
     a.push(i);
   }
 
   a[42] = req.query.input;
 
   // Non-vulnerable
-  res.send('Answer: ' + eval(a[0]))
+  res.send('Answer: ' + eval(a[0]));
 })
 // Example-20 end
 
@@ -224,8 +224,8 @@ app.get('/example-20', (req, res) => {
 
 // Example-22 start
 app.get('/example-22', (req, res) => {
-  const a = []
-  for (i = 0; i < 100; i++) {
+  const a = [];
+  for (let i = 0; i < 100; i++) {
     a.push(i);
     if (i == 42) {
       a[i] = req.query.input;
@@ -233,7 +233,7 @@ app.get('/example-22', (req, res) => {
   }
 
   // Vulnerable
-  res.send('Answer: ' + eval(a[42]))
+  res.send('Answer: ' + eval(a[42]));
 })
 // Example-22 end
 
@@ -242,8 +242,8 @@ app.get('/example-22', (req, res) => {
 
 // Example-24 start
 app.get('/example-24', (req, res) => {
-  const a = []
-  for (i = 0; i < 100; i++) {
+  const a = [];
+  for (let i = 0; i < 100; i++) {
     a.push(i);
     if (i == 42) {
       a[i] = req.query.input;
@@ -251,7 +251,7 @@ app.get('/example-24', (req, res) => {
   }
 
   // Non-vulnerable
-  res.send('Answer: ' + eval(a[0]))
+  res.send('Answer: ' + eval(a[0]));
 })
 // Example-24 end
 
@@ -260,10 +260,11 @@ app.get('/example-24', (req, res) => {
 
 // Example-26 start
 app.get('/example-26', (req, res) => {
-  const f = x => x
-  const tainted = f(req.query.input);
+  const id = x => x;
+  const tainted = id(req.query.input);
 
-  res.send('Answer: ' + eval(tainted))
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-26 end
 
@@ -272,32 +273,33 @@ app.get('/example-26', (req, res) => {
 
 // Example-28 start
 app.get('/example-28', (req, res) => {
-  const f = x => { const y = x; return 0; }
-  const untainted = f(req.query.input);
+  const zero = x => { return 0; };
+  const untainted = zero(req.query.input);
 
-  res.send('Answer: ' + eval(untainted))
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-28 end
 
 // Example-38 start
-function lambdaSink(res, f, s) {
-  res.send('Answer: ' + eval(f(s)))
-}
-
 app.get('/example-38', (req, res) => {
-  const f = x => { const y = x; return 0; }
-  const s = req.query.input;
+  const apply = (f, s) => f(s);
+  const zero = x => { return 0; };
+  const untainted = apply(zero, req.query.input);
 
-  lambdaSink(res, f, s);
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-38 end
 
 // Example-40 start
 app.get('/example-40', (req, res) => {
-  const f = x => x;
-  const s = req.query.input;
+  const apply = (f, s) => f(s);
+  const id = x => x;
+  const tainted = apply(id, req.query.input);
 
-  lambdaSink(res, f, s);
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-40 end
 
