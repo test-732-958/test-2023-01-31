@@ -460,29 +460,31 @@ app.get('/example-52', (req, res) => {
 
 // Example-54 start
 app.get('/example-54', (req, res) => {
-  a = req.query.input;
+  var tainted = req.query.input;
 
   function codeHoist() {
-      var a = 0;
+      var tainted = 0;
   }
 
   codeHoist();
 
-  res.send('Answer: ' + eval(a))
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-54 end
 
 // Example-56 start
 app.get('/example-56', (req, res) => {
-  a = req.query.input;
+  var untainted = req.query.input;
 
   function codeHoist() {
-      a = 0;
+      untainted = 0;
   }
 
   codeHoist();
 
-  res.send('Answer: ' + eval(a))
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-56 end
 
