@@ -490,37 +490,37 @@ app.get('/example-56', (req, res) => {
 
 // Example-58 start
 app.get('/example-58', (req, res) => {
-  const dangerous = "dangerous";
-  const not = "not";
-  const field = "field";
-
-  const notDangerousField = not + dangerous + field;
-  const dangerousField = dangerous + field;
-
-  var dict = {
-    "dangerousfield": req.query.input,
-    "notdangerousfield": 0
+  const dict = {
+    "tainted": req.query.input,
+    "untainted": 0
   }
 
-  res.send('Answer: ' + eval(dict[dangerousField]))
+  const taintString = "taint";
+  const unString = "un";
+  const edString = "ed"
+
+  const tainted = dict[taintString + edString];
+
+  // Vulnerable
+  res.send('Answer: ' + eval(tainted))
 })
 // Example-58 end
 
 // Example-60 start
 app.get('/example-60', (req, res) => {
-  const dangerous = "dangerous";
-  const not = "not";
-  const field = "field";
-
-  const notDangerousField = not + dangerous + field;
-  const dangerousField = dangerous + field;
-
-  var dict = {
-    "dangerousfield": req.query.input,
-    "notdangerousfield": 0
+  const dict = {
+    "tainted": req.query.input,
+    "untainted": 0
   }
 
-  res.send('Answer: ' + eval(dict[notDangerousField]))
+  const taintString = "taint";
+  const unString = "un";
+  const edString = "ed"
+
+  const tainted = dict[unString + taintString + edString];
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(tainted))
 })
 // Example-60 end
 
