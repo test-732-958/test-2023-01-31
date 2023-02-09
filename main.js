@@ -502,7 +502,7 @@ app.get('/example-58', (req, res) => {
   const tainted = dict[taintString + edString];
 
   // Vulnerable
-  res.send('Answer: ' + eval(tainted))
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-58 end
 
@@ -520,7 +520,7 @@ app.get('/example-60', (req, res) => {
   const untainted = dict[unString + taintString + edString];
 
   // Non-vulnerable
-  res.send('Answer: ' + eval(untainted))
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-60 end
 
@@ -541,7 +541,7 @@ app.get('/example-62', (req, res) => {
   const tainted = taintedFun();
 
   // Vulnerable
-  res.send('Answer: ' + eval(tainted))
+  res.send('Answer: ' + eval(tainted));
 })
 // Example-62 end
 
@@ -562,7 +562,7 @@ app.get('/example-64', (req, res) => {
   const untainted = untaintedFun();
 
   // Non-vulnerable
-  res.send('Answer: ' + eval(untainted))
+  res.send('Answer: ' + eval(untainted));
 })
 // Example-64 end
 
@@ -575,7 +575,7 @@ app.get('/example-66', (req, res) => {
   }
   catch (e) {
     // Vulnerable
-    res.send('Answer: ' + eval(e.message))
+    res.send('Answer: ' + eval(e.message));
   }
 })
 // Example-66 end
@@ -589,7 +589,7 @@ app.get('/example-68', (req, res) => {
   }
   catch (e) {
     // Non-vulnerable
-    res.send('Answer: ' + eval(e.code))
+    res.send('Answer: ' + eval(e.code));
   }
 })
 // Example-68 end
@@ -609,7 +609,7 @@ app.get('/example-70', (req, res) => {
   }
   catch (e) {
     // Vulnerable
-    res.send('Answer: ' + eval(e.message))
+    res.send('Answer: ' + eval(e.message));
   }
 })
 // Example-70 end
@@ -621,7 +621,7 @@ app.get('/example-72', (req, res) => {
   }
   catch (e) {
     // Non-vulnerable
-    res.send('Answer: ' + eval(e.code))
+    res.send('Answer: ' + eval(e.code));
   }
 })
 // Example-72 end
@@ -638,7 +638,8 @@ app.get('/example-74', (req, res) => {
     throwException(req.query.input, 1);
   }
   catch (e) {
-    res.send('Answer: ' + eval(e.message))
+    // Vulnerable
+    res.send('Answer: ' + eval(e.message));
   }
 })
 // Example-74 end
@@ -649,48 +650,43 @@ app.get('/example-76', (req, res) => {
     throwException(req.query.input, 0);
   }
   catch (e) {
-    res.send('Answer: ' + eval(e.code))
+    // Non-vulnerable
+    res.send('Answer: ' + eval(e.code));
   }
 })
 // Example-76 end
 
 // Example-78 start
-const evalMeGet = s => {
-  let internal = s;
+const dictWrapper = dict => {
+  let internal = dict;
   return {
-    get: () => internal["code"]
-  };
-}
-
-const evalMeSet = s => {
-  let internal = { "code": s };
-  return {
+    get: () => internal["code"],
     set: s => internal["code"] = s
   };
 }
 
 app.get('/example-78', (req, res) => {
-  const s = { "code": req.query.input };
+  const dict = { "code": req.query.input };
 
-  const a = evalMeGet(s);
-  const b = evalMeSet(s);
+  const dictWrapper1 = dictWrapper(dict);
+  const dictWrapper2 = dictWrapper(dict);
 
-  b.set(0);
-
-  res.send('Answer: ' + eval(a.get()))
+  // Vulnerable
+  res.send('Answer: ' + eval(dictWrapper1.get()));
 })
 // Example-78 end
 
 // Example-80 start
 app.get('/example-80', (req, res) => {
-  const s = { "code": 0 };
+  const dict = { "code": req.query.input };
 
-  const a = evalMeGet(s);
-  const b = evalMeSet(s);
+  const dictWrapper1 = dictWrapper(dict);
+  const dictWrapper2 = dictWrapper(dict);
 
-  b.set(req.query.input);
+  dictWrapper2.set(0);
 
-  res.send('Answer: ' + eval(a.get()))
+  // Non-vulnerable
+  res.send('Answer: ' + eval(dictWrapper1.get()));
 })
 // Example-80 end
 
