@@ -540,7 +540,7 @@ app.get('/example-62', (req, res) => {
   const taintedFun = obj.getValue.bind(taintedObj);
   const tainted = taintedFun();
 
-  // Non-vulnerable
+  // Vulnerable
   res.send('Answer: ' + eval(tainted))
 })
 // Example-62 end
@@ -569,9 +569,12 @@ app.get('/example-64', (req, res) => {
 // Example-66 start
 app.get('/example-66', (req, res) => {
   try {
-    throw new Error(req.query.input);
+    const error = new Error(req.query.input);
+    error.code = 1;
+    throw error;
   }
   catch (e) {
+    // Vulnerable
     res.send('Answer: ' + eval(e.message))
   }
 })
@@ -580,17 +583,21 @@ app.get('/example-66', (req, res) => {
 // Example-68 start
 app.get('/example-68', (req, res) => {
   try {
-    throw new Error(req.query.input);
+    const error = new Error(req.query.input);
+    error.code = 0;
+    throw error;
   }
   catch (e) {
+    // Non-vulnerable
     res.send('Answer: ' + eval(e.code))
   }
 })
 // Example-68 end
 
 // Example-70 start
-function CustomException(message) {
+function CustomException(message, code) {
   const error = new Error(message);
+  error.code = code;
   return error;
 }
 
@@ -598,9 +605,10 @@ CustomException.prototype = Object.create(Error.prototype);
 
 app.get('/example-70', (req, res) => {
   try {
-    throw new CustomException(req.query.input);
+    throw new CustomException(req.query.input, 1);
   }
   catch (e) {
+    // Vulnerable
     res.send('Answer: ' + eval(e.message))
   }
 })
@@ -609,22 +617,25 @@ app.get('/example-70', (req, res) => {
 // Example-72 start
 app.get('/example-72', (req, res) => {
   try {
-    throw new CustomException(req.query.input);
+    throw new CustomException(req.query.input, 0);
   }
   catch (e) {
+    // Non-vulnerable
     res.send('Answer: ' + eval(e.code))
   }
 })
 // Example-72 end
 
 // Example-74 start
-function throwException(req) {
-  throw new Error(req.query.input);
+function throwException(message, code) {
+  const error = new Error(message);
+  error.code = code;
+  throw error;
 }
 
 app.get('/example-74', (req, res) => {
   try {
-    throwException(req);
+    throwException(req.query.input, 1);
   }
   catch (e) {
     res.send('Answer: ' + eval(e.message))
@@ -635,7 +646,7 @@ app.get('/example-74', (req, res) => {
 // Example-76 start
 app.get('/example-76', (req, res) => {
   try {
-    throwException(req);
+    throwException(req.query.input, 0);
   }
   catch (e) {
     res.send('Answer: ' + eval(e.code))
