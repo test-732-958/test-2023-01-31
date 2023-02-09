@@ -517,42 +517,52 @@ app.get('/example-60', (req, res) => {
   const unString = "un";
   const edString = "ed"
 
-  const tainted = dict[unString + taintString + edString];
+  const untainted = dict[unString + taintString + edString];
 
   // Non-vulnerable
-  res.send('Answer: ' + eval(tainted))
+  res.send('Answer: ' + eval(untainted))
 })
 // Example-60 end
 
 // Example-62 start
 app.get('/example-62', (req, res) => {
   let obj = {
-    dangerous: req.query.input,
-    notDangerous: 0,
-    get: function () {
-      return this.dangerous;
-    },
+    value: NaN,
+    getValue: function() {
+      return this.value;
+    }
   }
 
-  const dangerous = 0;
+  let taintedObj = {
+    value: req.query.input
+  }
 
-  res.send('Answer: ' + eval(obj.get()))
+  const taintedFun = obj.getValue.bind(taintedObj);
+  const tainted = taintedFun();
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(tainted))
 })
 // Example-62 end
 
 // Example-64 start
 app.get('/example-64', (req, res) => {
   let obj = {
-    dangerous: req.query.input,
-    notDangerous: 0,
-    get: function () {
-      return this.notDangerous;
-    },
+    value: NaN,
+    getValue: function() {
+      return this.value;
+    }
   }
 
-  const dangerous = 0;
+  let untaintedObj = {
+    value: 0
+  }
 
-  res.send('Answer: ' + eval(obj.get()))
+  const untaintedFun = obj.getValue.bind(untaintedObj);
+  const untainted = untaintedFun();
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(untainted))
 })
 // Example-64 end
 
