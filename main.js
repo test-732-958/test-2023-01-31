@@ -690,6 +690,453 @@ app.get('/example-80', (req, res) => {
 })
 // Example-80 end
 
+// Example-82 start
+app.get('/example-82', (req, res) => {
+  function factory() {
+    var state = 0;
+    return {
+      getter() {
+        return state;
+      },
+      setter(s) {
+        state = s;
+      }
+    };
+  }
+
+  var inst = factory();
+  inst.setter(req.query.input);
+
+  // Vulnerable
+  res.send('Answer: ' + eval(inst.getter()));
+})
+// Example-82 end
+
+// Example-84 start
+app.get('/example-84', (req, res) => {
+  function factory() {
+    var state = 0;
+    return {
+      getter() {
+        return state;
+      },
+      setter(s) {
+        state = s;
+      }
+    };
+  }
+
+  var inst = factory();
+  inst.setter(req.query.input);
+  inst.setter(0);
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(inst.getter()));
+})
+// Example-84 end
+
+// Example-86 start
+app.get('/example-86', (req, res) => {
+  function C(v) {
+    this.v = v;
+  }
+
+  function getV() {
+    return this.v;
+  }
+
+  C.prototype.getV = getV;
+
+  var inst = new C(req.query.input);
+
+  // Vulnerable
+  res.send('Answer: ' + eval(inst.getV()));
+})
+// Example-86 end
+
+// Example-88 start
+app.get('/example-88', (req, res) => {
+  function C(v) {
+    this.v = v;
+  }
+
+  function getV() {
+    return this.v;
+  }
+
+  function setV(v) {
+    this.v = v;
+  }
+
+  C.prototype.getV = getV;
+  C.prototype.setV = setV;
+
+  var inst = new C(req.query.input);
+  inst.setV(0);
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(inst.getV()));
+})
+// Example-88 end
+
+// Example-90 start
+app.get('/example-90', (req, res) => {
+  var tainted = req.query.input;
+  var obj1 = {
+    a() { return tainted; },
+    b() { return this.a(); }
+  }
+  var obj2 = {
+    a() { return 0; }
+  }
+
+  obj2.b = obj1.b;
+
+  // Vulnerable
+  res.send('Answer: ' + eval(obj1.b()));
+})
+// Example-90 end
+
+// Example-92 start
+app.get('/example-92', (req, res) => {
+  var tainted = req.query.input;
+  var obj1 = {
+    a() { return tainted; },
+    b() { return this.a(); }
+  }
+  var obj2 = {
+    a() { return 0; }
+  }
+
+  obj2.b = obj1.b;
+
+  // Vulnerable
+  res.send('Answer: ' + eval(obj2.b()));
+})
+// Example-92 end
+
+// Example-94 start
+app.get('/example-94', (req, res) => {
+  function createModule() {
+    m = { dangerousOperation() { return req.query.input; }}
+  }
+
+  createModule();
+
+  // Vulnerable
+  res.send('Answer: ' + eval(m.dangerousOperation()));
+})
+// Example-94 end
+
+// Example-96 start
+app.get('/example-96', (req, res) => {
+  function createModule() {
+    m = { dangerousOperation() { return req.query.input; }}
+  }
+
+  function rewriteModule() {
+    m = { dangerousOperation() { return 0; }}
+  }
+
+  createModule();
+  rewriteModule();
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(m.dangerousOperation()));
+})
+// Example-96 end
+
+// Example-98 start
+app.get('/example-98', (req, res) => {
+  function f() {
+    this.m = { dangerousOperation() { return req.query.input; }}
+  }
+
+  f();
+
+  // Vulnerable
+  res.send('Answer: ' + eval(m.dangerousOperation()));
+})
+// Example-98 end
+
+// Example-100 start
+app.get('/example-100', (req, res) => {
+  function f() {
+    this.m = { dangerousOperation() { return req.query.input; }}
+  }
+
+  function g() {
+    this.m = { dangerousOperation() { return 0; }}
+  }
+
+  f();
+  g();
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(m.dangerousOperation()));
+})
+// Example-100 end
+
+// Example-102 start
+app.get('/example-102', (req, res) => {
+  function registerCallback(cb) {
+    cb(req.query.input);
+  }
+
+  function myCallback(msg) {
+    // Vulnerable
+    res.send('Answer: ' + eval(msg));
+  }
+
+  registerCallback(myCallback);
+})
+// Example-102 end
+
+// Example-104 start
+app.get('/example-104', (req, res) => {
+  function registerCallback(cb) {
+    cb(req.query.input);
+  }
+
+  function myCallback(msg) {
+    // Non-vulnerable
+    res.send('Answer: ' + eval(0));
+  }
+
+  registerCallback(myCallback);
+})
+// Example-104 end
+
+// Example-106 start
+app.get('/example-106', (req, res) => {
+  function f(x) {
+    var snk = x => res.send('Answer: ' + eval(x));
+    function g(y) {
+      // Vulnerable
+      snk(y);
+    }
+    g(x);
+  }
+
+  f(req.query.input);
+})
+// Example-106 end
+
+// Example-108 start
+app.get('/example-108', (req, res) => {
+  function f(x) {
+    // Non-vulnerable
+    var snk = x => res.send('Answer: ' + eval(x));
+    function g(y) {
+      snk(y);
+    }
+    g(0);
+  }
+
+  f(req.query.input);
+})
+// Example-108 end
+
+// Example-110 start
+app.get('/example-110', (req, res) => {
+  function h(snk) {
+    var s = snk;
+    function n(t) {
+      s(t);
+    }
+    return n;
+  }
+
+  // Vulnerable
+  var c = h(x => res.send('Answer: ' + eval(x)));
+  c(req.query.input);
+})
+// Example-110 end
+
+// Example-112 start
+app.get('/example-112', (req, res) => {
+  function h(snk) {
+    var s = snk;
+    function n(t) {
+      s(0);
+    }
+    return n;
+  }
+
+  // Non-vulnerable
+  var c = h(x => res.send('Answer: ' + eval(x)));
+  c(req.query.input);
+})
+// Example-112 end
+
+// Example-114 start
+app.get('/example-114', (req, res) => {
+  function f() {
+    var state = "";
+    return ({
+      get() {
+        return state;
+      },
+      set(s) {
+        state = s;
+      }
+    });
+  }
+
+  var obj = f();
+  obj.set(req.query.input);
+
+  // Vulnerable
+  res.send('Answer: ' + eval(obj.get()));
+})
+// Example-114 end
+
+// Example-116 start
+app.get('/example-116', (req, res) => {
+  function f() {
+    var state = "";
+    return ({
+      get() {
+        return state;
+      },
+      set(s) {
+        state = 0;
+      }
+    });
+  }
+
+  var obj = f();
+  obj.set(req.query.input);
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(obj.get()));
+})
+// Example-116 end
+
+// Example-118 start
+app.get('/example-118', (req, res) => {
+  function c(objSnk) {
+    var s = objSnk.snk;
+    return function (t) {
+      s(t);
+    }
+  }
+
+  // Vulnerable
+  var f = c({snk: function(x) { res.send('Answer: ' + eval(x)); }});
+  f(req.query.input);
+})
+// Example-118 end
+
+// Example-120 start
+app.get('/example-120', (req, res) => {
+  function c(objSnk) {
+    var s = objSnk.snk;
+    return function (t) {
+      s(0);
+    }
+  }
+
+  // Non-vulnerable
+  var f = c({snk: function(x) { res.send('Answer: ' + eval(x)); }});
+  f(req.query.input);
+})
+// Example-120 end
+
+// Example-122 start
+app.get('/example-122', (req, res) => {
+  function c(snk) {
+    return function (t) {
+      snk(t);
+    }
+  }
+
+  // Vulnerable
+  var f = c(x => res.send('Answer: ' + eval(x)));
+  f(req.query.input);
+})
+// Example-122 end
+
+// Example-124 start
+app.get('/example-124', (req, res) => {
+  function c(snk) {
+    return function (t) {
+      snk(0);
+    }
+  }
+
+  // Non-vulnerable
+  var f = c(x => res.send('Answer: ' + eval(x)));
+  f(req.query.input);
+})
+// Example-124 end
+
+// Example-126 start
+app.get('/example-126', (req, res) => {
+  var tainted = req.query.input;
+  function C() {
+    this.p = "harmless";
+    return { p: tainted };
+  }
+
+  var c = new C();
+
+  // Vulnerable
+  res.send('Answer: ' + eval(c.p));
+})
+// Example-126 end
+
+// Example-128 start
+app.get('/example-128', (req, res) => {
+  var tainted = req.query.input;
+  function C() {
+    this.p = 0;
+  }
+
+  var c = new C();
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(c.p));
+})
+// Example-128 end
+
+// Example-130 start
+app.get('/example-130', (req, res) => {
+  class Foo {
+    constructor(aa) {
+      this.a = aa;
+    }
+    bar() {
+      return this.a;
+    }
+  }
+
+  let foo = new Foo(req.query.input);
+
+  // Vulnerable
+  res.send('Answer: ' + eval(foo.bar()));
+})
+// Example-130 end
+
+// Example-132 start
+app.get('/example-132', (req, res) => {
+  class Foo {
+    constructor(aa) {
+      this.a = aa;
+    }
+    bar() {
+      return 0;
+    }
+  }
+
+  let foo = new Foo(req.query.input);
+
+  // Non-vulnerable
+  res.send('Answer: ' + eval(foo.bar()));
+})
+// Example-132 end
+
+
 // This starts the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
